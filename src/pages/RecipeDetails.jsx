@@ -1,0 +1,132 @@
+import { useEffect, useMemo, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
+import ErrorMessage from "../components/ErrorMessage";
+import { getMealById } from "../utils/api";
+
+export default function RecipeDetails() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [meal, setMeal] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchMeal() {
+      setError("");
+      setLoading(true);
+      try {
+        const data = await getMealById(id);
+        if (isMounted) setMeal(data);
+      } catch (err) {
+        if (isMounted) setError("Failed to load recipe. Please try again.");
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    }
+    fetchMeal();
+    return () => {
+      isMounted = false;
+    };
+  }, [id]);
+
+  const ingredients = useMemo(() => {
+    if (!meal) return [];
+    const items = [];
+    for (let i = 1; i <= 20; i++) {
+      const ing = meal[`strIngredient${i}`];
+      const measure = meal[`strMeasure${i}`];
+      if (ing && ing.trim()) {
+        items.push({ ingredient: ing.trim(), measure: (measure || "").trim() });
+      }
+    }
+    return items;
+  }, [meal]);
+
+  if (loading) return <Loader />;
+  if (error) return <ErrorMessage message={error} onRetry={() => window.location.reload()} />;
+  if (!meal) return <div className="text-center text-gray-600 py-16">Recipe not found.</div>;
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-6 flex items-center gap-3 text-sm text-blue-700">
+        <button
+          type="button"
+          onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/"))}
+          className="hover:underline"
+        >
+          Home
+        </button>
+        <span>/</span>
+        <span className="text-gray-500">{meal.strMeal}</span>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="rounded-2xl border overflow-hidden">
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
+          <img
+            src={`${meal.strMealThumb}/medium`}
+            alt={meal.strMeal}
+            className="block w-full h-auto"
+          />
+        </div>
+
+        <div className="self-center justify-center">
+          <h1 className="text-3xl font-semibold text-gray-900">{meal.strMeal}</h1>
+          <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+            {meal.strCategory && (
+              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-3 py-1 border border-blue-200">{meal.strCategory}</span>
+            )}
+            {meal.strArea && (
+              <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 border border-emerald-200">{meal.strArea}</span>
+            )}
+            {meal.strTags && (
+              <span className="inline-flex items-center rounded-full bg-purple-50 text-purple-700 px-3 py-1 border border-purple-200">{meal.strTags}</span>
+            )}
+          </div>
+
+          <h2 className="mt-6 text-xl font-semibold text-gray-900">Ingredients</h2>
+          <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {ingredients.map(({ ingredient, measure }, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-gray-700">
+                <span className="mt-1 h-2 w-2 rounded-full bg-gray-400" />
+                <span>
+                  <span className="font-medium">{ingredient}</span>
+                  {measure && <span className="text-gray-500"> — {measure}</span>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Full-width section continuing after the image/summary block */}
+      <div className="mt-10">
+        <h2 className="text-xl font-semibold text-gray-900">Instructions</h2>
+        <ol className="mt-2 list-decimal pl-6 space-y-2 text-gray-700">
+          {String(meal.strInstructions || "")
+            .split(/\r?\n+/)
+            .map((line) => line.replace(/^\*\s?/, "").trim())
+            .filter((line) => line.length > 0)
+            .map((step, idx) => (
+              <li key={idx} className="leading-relaxed">{step}</li>
+            ))}
+        </ol>
+
+        {meal.strYoutube && (
+          <a
+            href={meal.strYoutube}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center rounded-md bg-red-600 text-white px-4 py-2 mt-6 hover:bg-red-700"
+          >
+            Watch on YouTube
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
