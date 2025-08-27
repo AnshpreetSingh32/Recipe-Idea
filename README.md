@@ -1,12 +1,50 @@
-# React + Vite
+# 🍳 What's Cooking?  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**What's Cooking?** is a simple and clean recipe discovery app built with **React.js** and **Tailwind CSS**.  
+It helps busy professionals and home cooks quickly find recipes based on the ingredients they already have.  
 
-Currently, two official plugins are available:
+The app uses the **[TheMealDB API](https://www.themealdb.com/)** to fetch recipes, ingredients, and cuisine information.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔎 **Search by ingredients** – enter ingredients like `chicken, rice` to find meal ideas  
+- 🎲 **Random meal generator** – discover a surprise dish instantly  
+- 📂 **Advanced filters** – filter by:
+  - Meal Categories (e.g., Chicken, Dessert, Seafood)  
+  - Cuisine Areas (e.g., Indian, American, Chinese)  
+  - Popular Ingredients  
+- 📱 **Responsive design** – works on desktop and mobile  
+- ⚡ **Clean UI/UX** – minimal design with Tailwind CSS  
+- 🚦 **Error & loading states** – shows spinner and friendly error messages  
+- 📋 **Recipe details page** – full instructions, meal image, and ingredients list  
+
+---
+
+## 🖼️ Screenshots  
+
+### Homepage  
+![Homepage Screenshot](./screenshots/homepage.png)  
+
+### Recipe Details  
+*(add a screenshot of recipe details page here)*  
+
+---
+
+## 🛠️ Tech Stack  
+
+- **Frontend Framework**: [React.js](https://reactjs.org/)  
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)  
+- **Routing**: [React Router](https://reactrouter.com/)  
+- **API**: [TheMealDB](https://www.themealdb.com/)  
+- **Deployment**: *(Vercel / Netlify / GitHub Pages)*  
+
+---
+
+## 🚀 Getting Started  
+
+### 1. Clone the repo  
+```bash
+git clone https://github.com/your-username/whats-cooking.git
+cd whats-cooking
