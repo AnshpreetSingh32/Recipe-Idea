@@ -50,11 +50,11 @@ export default function RecipeDetails() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="mb-6 flex items-center gap-3 text-sm text-blue-700">
+      <div className="mb-6 flex items-center gap-3 text-sm text-orange-600">
         <button
           type="button"
           onClick={() => (window.history.length > 1 ? navigate(-1) : navigate("/"))}
-          className="hover:underline"
+          className="hover:underline transition-colors duration-200"
         >
           Home
         </button>
@@ -63,34 +63,34 @@ export default function RecipeDetails() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-        <div className="rounded-2xl border overflow-hidden">
+        <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-orange-300 shadow-lg">
           {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
             src={`${meal.strMealThumb}/medium`}
             alt={meal.strMeal}
-            className="block w-full h-auto"
+            className="block w-full h-auto "
           />
         </div>
 
         <div className="self-center justify-center">
-          <h1 className="text-3xl font-semibold text-gray-900">{meal.strMeal}</h1>
-          <div className="mt-3 flex flex-wrap items-center gap-3 text-sm">
+          <h1 className="text-4xl font-semibold">{meal.strMeal}</h1>
+          <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
             {meal.strCategory && (
-              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-700 px-3 py-1 border border-blue-200">{meal.strCategory}</span>
+              <span className="inline-flex items-center rounded-full bg-orange-50 text-orange-600 px-3 py-1 border border-orange-200">{meal.strCategory}</span>
             )}
             {meal.strArea && (
-              <span className="inline-flex items-center rounded-full bg-emerald-50 text-emerald-700 px-3 py-1 border border-emerald-200">{meal.strArea}</span>
+              <span className="inline-flex items-center rounded-full bg-blue-50 text-blue-600 px-3 py-1 border border-blue-200">{meal.strArea}</span>
             )}
             {meal.strTags && (
-              <span className="inline-flex items-center rounded-full bg-purple-50 text-purple-700 px-3 py-1 border border-purple-200">{meal.strTags}</span>
+              <span className="inline-flex items-center rounded-full bg-purple-50 text-purple-600 px-3 py-1 border border-purple-200">{meal.strTags}</span>
             )}
           </div>
 
-          <h2 className="mt-6 text-xl font-semibold text-gray-900">Ingredients</h2>
+          <h2 className="mt-6 text-2xl font-semibold text-gray-900">Ingredients</h2>
           <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
             {ingredients.map(({ ingredient, measure }, idx) => (
               <li key={idx} className="flex items-start gap-2 text-gray-700">
-                <span className="mt-1 h-2 w-2 rounded-full bg-gray-400" />
+                <span className="mt-1 h-2 w-2 rounded-full bg-[#FFA233]" />
                 <span>
                   <span className="font-medium">{ingredient}</span>
                   {measure && <span className="text-gray-500"> — {measure}</span>}
@@ -103,8 +103,8 @@ export default function RecipeDetails() {
 
       {/* Full-width section continuing after the image/summary block */}
       <div className="mt-10">
-        <h2 className="text-xl font-semibold text-gray-900">Instructions</h2>
-        <ol className="mt-2 list-decimal pl-6 space-y-2 text-gray-700">
+        <h2 className="text-2xl font-semibold text-gray-900">Instructions</h2>
+        <ol className="mt-2 list-decimal pl-6 space-y-2 text-gray-800">
           {String(meal.strInstructions || "")
             .split(/\r?\n+/)
             .map((line) => line.replace(/^\*\s?/, "").trim())
@@ -114,15 +114,30 @@ export default function RecipeDetails() {
             ))}
         </ol>
 
-        {meal.strYoutube && (
-          <a
-            href={meal.strYoutube}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-red-600 text-white px-4 py-2 mt-6 hover:bg-red-700"
-          >
-            Watch on YouTube
-          </a>
+        {(meal.strYoutube || meal.strSource) && (
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            {meal.strYoutube && (
+              <a
+                href={meal.strYoutube}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-lg bg-red-600 text-white px-4 py-2 hover:bg-red-700 transition-all duration-200 shadow-sm"
+              >
+                Watch on YouTube
+              </a>
+            )}
+            {meal.strSource && (
+              <a
+                href={meal.strSource}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center rounded-lg border border-gray-200
+                bg-gray-100 text-gray-700 px-4 py-2 hover:bg-gray-200 transition-all duration-200 shadow-sm"
+              >
+                View Source
+              </a>
+            )}
+          </div>
         )}
       </div>
     </div>

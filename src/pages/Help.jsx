@@ -36,13 +36,13 @@ export default function Help() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
       {/* Hero Section */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="text-4xl font-bold mb-4">
           Need help? We've got answers
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-xl text-gray-700 max-w-2xl mx-auto">
           Quick answers to common questions. Can't find what you're looking for? 
           We're here to help!
         </p>
@@ -50,44 +50,48 @@ export default function Help() {
 
       {/* FAQ Section */}
       <div className="mb-12">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-6">Frequently Asked Questions</h2>
+        <h2 className="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white border border-gray-200 rounded-lg shadow-sm">
+            <div key={index} className="bg-white border border-gray-100 rounded-xl shadow-sm">
               <button
                 onClick={() => toggleFaq(index)}
-                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors duration-200"
+                className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-orange-50 transition-colors duration-200 rounded-t-xl bg-[#f3f8f8] rounded-xl"
               >
-                <span className="font-medium text-gray-900">{faq.question}</span>
-                <span className="text-gray-400 text-xl">
+                <span className="font-medium text-gray-800">{faq.question}</span>
+                <span className="text-orange-400 text-xl">
                   {openFaq === index ? '−' : '+'}
                 </span>
               </button>
-              {openFaq === index && (
-                <div className="px-6 pb-4">
-                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+              <div
+                className={`grid transition-all duration-300 ease-in-out ${
+                  openFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                }`}
+              >
+                <div className={`overflow-hidden px-6 ${openFaq === index ? 'pb-4' : 'pb-0'}`}> 
+                  <p className="text-gray-700 leading-relaxed pt-1">{faq.answer}</p>
                 </div>
-              )}
+              </div>
             </div>
           ))}
         </div>
       </div>
 
       {/* Contact Section */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl mb-8">
+      <div className="bg-gradient-to-br from-orange-100 to-[#c4d9dd] p-8 rounded-2xl mb-8 border-orange-100 border-2">
         <div className="text-center">
-          <div className="text-3xl mb-4">💬</div>
+          <div className="text-4xl mb-4">🤔💭</div>
           <h2 className="text-2xl font-semibold text-gray-900 mb-4">Still need help?</h2>
-          <p className="text-gray-700 mb-6">
+          <p className="text-gray-800 mb-6">
             We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
           </p>
           <div className="space-y-4">
             <a
-              href="mailto:support@recipeideas.com"
-              className="inline-flex items-center px-4 sm:px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm sm:text-base break-words"
+              href="mailto:anshpreetsingh3232@gmail.com"
+              className="inline-flex items-center px-4 sm:px-6 py-3 bg-orange-400 text-white font-semibold rounded-lg hover:bg-orange-500 transition-all hover:scale-105 duration-200 text-lg sm:text-base break-words shadow-sm"
             >
-              <span className="hidden sm:inline">📧 Email us at </span>
-              <span className="sm:hidden">📧 Contact us</span>
+              <span className="hidden sm:inline">🖂 Email us at </span>
+              <span className="sm:hidden">🖂 Contact us</span>
               <span className="hidden sm:inline">support@recipeideas.com</span>
             </a>
             <div className="text-sm text-gray-600">
@@ -98,28 +102,21 @@ export default function Help() {
       </div>
 
       {/* Quick Start CTA */}
-      <div className="text-center bg-gradient-to-r from-green-600 to-emerald-600 text-white p-8 rounded-2xl mb-8">
+      <div className="text-center bg-gradient-to-tl from-orange-100 to-[#c4d9dd] p-8 rounded-2xl mb-8">
         <h3 className="text-2xl font-semibold mb-4">Ready to start cooking?</h3>
-        <p className="text-green-100 mb-6">
+        <p className=" mb-6">
           Jump back to the recipe search and discover your next meal
         </p>
         <Link
           to="/"
-          className="inline-flex items-center px-6 py-3 bg-white text-green-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-200 shadow-lg"
+          className="inline-flex items-center px-6 py-3 bg-white text-orange-600 font-semibold rounded-lg hover:bg-[#e0ebed] transition-all shadow-lg
+          hover:scale-105 duration-200"
         >
           Start Searching Recipes →
         </Link>
       </div>
 
-      {/* Back to Recipes CTA */}
-      <div className="text-center">
-        <Link
-          to="/"
-          className="inline-flex items-center px-4 py-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-200"
-        >
-          ← Back to Recipes
-        </Link>
-      </div>
+      
     </div>
   );
 }
