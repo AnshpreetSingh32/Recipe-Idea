@@ -20,15 +20,6 @@ The app uses the **[TheMealDB API](https://www.themealdb.com/)** to fetch recipe
 - 🚦 **Error & loading states** – shows spinner and friendly error messages  
 - 📋 **Recipe details page** – full instructions, meal image, and ingredients list  
 
----
-
-## 🖼️ Screenshots  
-
-### Homepage  
-![Homepage Screenshot](./screenshots/homepage.png)  
-
-### Recipe Details  
-*(add a screenshot of recipe details page here)*  
 
 ---
 
@@ -40,11 +31,3 @@ The app uses the **[TheMealDB API](https://www.themealdb.com/)** to fetch recipe
 - **API**: [TheMealDB](https://www.themealdb.com/)  
 - **Deployment**: *(Vercel / Netlify / GitHub Pages)*  
 
----
-
-## 🚀 Getting Started  
-
-### 1. Clone the repo  
-```bash
-git clone https://github.com/your-username/whats-cooking.git
-cd whats-cooking
