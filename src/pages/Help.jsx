@@ -1,9 +1,13 @@
+// Help/FAQ page for the app
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+// Main Help page component
 export default function Help() {
+  // Tracks which FAQ is open
   const [openFaq, setOpenFaq] = useState(0);
 
+  // List of FAQ questions and answers
   const faqs = [
     {
       question: "How do I search for recipes?",
@@ -31,13 +35,14 @@ export default function Help() {
     }
   ];
 
+  // Toggle open/close for FAQ
   const toggleFaq = (index) => {
     setOpenFaq(openFaq === index ? -1 : index);
   };
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-      {/* Hero Section */}
+      {/* Top hero section with help intro */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">
           Need help? We've got answers
@@ -48,12 +53,13 @@ export default function Help() {
         </p>
       </div>
 
-      {/* FAQ Section */}
+      {/* FAQ section with questions and answers */}
       <div className="mb-12">
         <h2 className="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div key={index} className="bg-white border border-gray-100 rounded-xl shadow-sm">
+              {/* FAQ question button */}
               <button
                 onClick={() => toggleFaq(index)}
                 className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-orange-50 transition-colors duration-200 rounded-t-xl bg-[#f3f8f8] rounded-xl"
@@ -63,6 +69,7 @@ export default function Help() {
                   {openFaq === index ? '−' : '+'}
                 </span>
               </button>
+              {/* FAQ answer, collapses/expands */}
               <div
                 className={`grid transition-all duration-300 ease-in-out ${
                   openFaq === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
@@ -77,7 +84,7 @@ export default function Help() {
         </div>
       </div>
 
-      {/* Contact Section */}
+      {/* Contact/help section */}
       <div className="bg-gradient-to-br from-orange-100 to-[#c4d9dd] p-8 rounded-2xl mb-8 border-orange-100 border-2">
         <div className="text-center">
           <div className="text-4xl mb-4">🤔💭</div>
@@ -86,12 +93,13 @@ export default function Help() {
             We'd love to hear from you! Send us a message and we'll get back to you as soon as possible.
           </p>
           <div className="space-y-4">
+            {/* Email contact button */}
             <a
               href="mailto:anshpreetsingh3232@gmail.com"
               className="inline-flex items-center px-4 sm:px-6 py-3 bg-orange-400 text-white font-semibold rounded-lg hover:bg-orange-500 transition-all hover:scale-105 duration-200 text-lg sm:text-base break-words shadow-sm"
             >
-              <span className="hidden sm:inline">🖂 Email us at </span>
-              <span className="sm:hidden">🖂 Contact us</span>
+              <span className="hidden sm:inline">� Email us at </span>
+              <span className="sm:hidden">� Contact us</span>
               <span className="hidden sm:inline">support@recipeideas.com</span>
             </a>
             <div className="text-sm text-gray-600">
@@ -101,7 +109,7 @@ export default function Help() {
         </div>
       </div>
 
-      {/* Quick Start CTA */}
+      {/* Quick start call to action */}
       <div className="text-center bg-gradient-to-tl from-orange-100 to-[#c4d9dd] p-8 rounded-2xl mb-8">
         <h3 className="text-2xl font-semibold mb-4">Ready to start cooking?</h3>
         <p className=" mb-6">
@@ -109,14 +117,11 @@ export default function Help() {
         </p>
         <Link
           to="/"
-          className="inline-flex items-center px-6 py-3 bg-white text-orange-600 font-semibold rounded-lg hover:bg-[#e0ebed] transition-all shadow-lg
-          hover:scale-105 duration-200"
+          className="inline-flex items-center px-6 py-3 bg-white text-orange-600 font-semibold rounded-lg hover:bg-[#e0ebed] transition-all shadow-lg hover:scale-105 duration-200"
         >
           Start Searching Recipes →
         </Link>
       </div>
-
-      
     </div>
   );
 }

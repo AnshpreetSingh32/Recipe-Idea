@@ -1,16 +1,22 @@
+// Recipe details page for a single meal
 import { useEffect, useMemo, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
 import { getMealById } from "../utils/api";
 
+// Main RecipeDetails component
 export default function RecipeDetails() {
+  // Get recipe ID from URL
   const { id } = useParams();
+  // Navigation hook
   const navigate = useNavigate();
+  // State for meal, loading, and error
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  // Fetch recipe details when ID changes
   useEffect(() => {
     let isMounted = true;
     async function fetchMeal() {
@@ -31,6 +37,7 @@ export default function RecipeDetails() {
     };
   }, [id]);
 
+  // Extracts ingredients and measures from meal object
   const ingredients = useMemo(() => {
     if (!meal) return [];
     const items = [];
@@ -44,12 +51,15 @@ export default function RecipeDetails() {
     return items;
   }, [meal]);
 
+  // Show loader, error, or not found states
   if (loading) return <Loader />;
   if (error) return <ErrorMessage message={error} onRetry={() => window.location.reload()} />;
   if (!meal) return <div className="text-center text-gray-600 py-16">Recipe not found.</div>;
 
+  // Render the recipe details UI
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Breadcrumb navigation */}
       <div className="mb-6 flex items-center gap-3 text-sm text-orange-600">
         <button
           type="button"
@@ -62,7 +72,9 @@ export default function RecipeDetails() {
         <span className="text-gray-500">{meal.strMeal}</span>
       </div>
 
+      {/* Main content: image and summary */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        {/* Meal image */}
         <div className="rounded-2xl border border-gray-100 overflow-hidden shadow-orange-300 shadow-lg">
           {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img
@@ -72,6 +84,7 @@ export default function RecipeDetails() {
           />
         </div>
 
+        {/* Meal title, tags, and ingredients */}
         <div className="self-center justify-center">
           <h1 className="text-4xl font-semibold">{meal.strMeal}</h1>
           <div className="mt-4 flex flex-wrap items-center gap-3 text-sm">
@@ -86,6 +99,7 @@ export default function RecipeDetails() {
             )}
           </div>
 
+          {/* List of ingredients */}
           <h2 className="mt-6 text-2xl font-semibold text-gray-900">Ingredients</h2>
           <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2">
             {ingredients.map(({ ingredient, measure }, idx) => (
@@ -101,7 +115,7 @@ export default function RecipeDetails() {
         </div>
       </div>
 
-      {/* Full-width section continuing after the image/summary block */}
+      {/* Instructions and external links */}
       <div className="mt-10">
         <h2 className="text-2xl font-semibold text-gray-900">Instructions</h2>
         <ol className="mt-2 list-decimal pl-6 space-y-2 text-gray-800">
@@ -114,6 +128,7 @@ export default function RecipeDetails() {
             ))}
         </ol>
 
+        {/* YouTube and source links if available */}
         {(meal.strYoutube || meal.strSource) && (
           <div className="mt-6 flex flex-wrap items-center gap-3">
             {meal.strYoutube && (
@@ -131,8 +146,7 @@ export default function RecipeDetails() {
                 href={meal.strSource}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-lg border border-gray-200
-                bg-gray-100 text-gray-700 px-4 py-2 hover:bg-gray-200 transition-all duration-200 shadow-sm"
+                className="inline-flex items-center justify-center rounded-lg border border-gray-200 bg-gray-100 text-gray-700 px-4 py-2 hover:bg-gray-200 transition-all duration-200 shadow-sm"
               >
                 View Source
               </a>

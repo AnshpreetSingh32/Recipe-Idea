@@ -1,3 +1,9 @@
+/**
+ * Loader Component
+ * 
+ * A simple spinning loader animation component used to indicate loading states.
+ * Uses Tailwind CSS for styling and animations.
+ */
 export default function Loader() {
   return (
     <div className="flex items-center justify-center py-10">

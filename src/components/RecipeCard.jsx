@@ -1,3 +1,16 @@
+/**
+ * RecipeCard Component
+ * 
+ * Displays a single recipe in a card format with image, title, and a link to view details.
+ * Features hover effects, image lazy loading, and responsive design.
+ * 
+ * @param {Object} props
+ * @param {Object} props.meal - The meal object containing recipe data
+ * @param {string} props.meal.idMeal - Unique identifier for the meal
+ * @param {string} props.meal.strMeal - Name of the meal
+ * @param {string} props.meal.strMealThumb - URL of the meal's image
+ */
+
 import { Link } from "react-router-dom";
 
 export default function RecipeCard({ meal }) {

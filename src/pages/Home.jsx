@@ -1,10 +1,13 @@
+// React and hooks
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+// UI components
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
 import RecipeCard from "../components/RecipeCard";
 import AdvancedFilters from "../components/AdvancedFilters";
 import MealSuggestions from "../components/MealSuggestions";
+// API helpers and assets
 import { 
   searchMealsByIngredient, 
   searchMealsByName, 
@@ -14,17 +17,27 @@ import {
 } from "../utils/api";
 import backgroundSvg from "../assets/background.svg";
 
+// Main Home page component
 export default function Home() {
+  // Search input value
   const [query, setQuery] = useState("");
+  // List of meals to show
   const [meals, setMeals] = useState([]);
+  // Loading state
   const [loading, setLoading] = useState(false);
+  // Error message
   const [error, setError] = useState("");
+  // Tracks if user has searched
   const [hasSearched, setHasSearched] = useState(false);
+  // URL search params
   const [searchParams, setSearchParams] = useSearchParams();
+  // Selected filters for advanced search
   const [selectedFilters, setSelectedFilters] = useState({});
+  // Stores a random meal
   const [randomMeal, setRandomMeal] = useState(null);
 
   // Smart search detection - if query contains common ingredients, search by ingredients, otherwise by name
+  // Checks if query is ingredient or meal name
   const detectSearchType = (searchQuery) => {
     const commonIngredients = [
       'chicken', 'beef', 'pork', 'fish', 'rice', 'pasta', 'tomato', 'onion', 'garlic',
@@ -38,6 +51,7 @@ export default function Home() {
     return hasIngredients ? 'ingredients' : 'name';
   };
 
+  // Handles search form submit
   async function handleSearch(e) {
     e?.preventDefault?.();
     setError("");
@@ -77,6 +91,7 @@ export default function Home() {
     }
   }
 
+  // Fetches a random meal
   async function handleRandomMeal() {
     setLoading(true);
     setError("");
@@ -97,6 +112,7 @@ export default function Home() {
     }
   }
 
+  // Handles filter changes and fetches filtered meals
   async function handleFilterChange(newFilters) {
     setSelectedFilters(newFilters);
     
@@ -154,6 +170,7 @@ export default function Home() {
     }
   }
 
+  // Called when a meal is selected from suggestions
   const handleMealSelect = (meal) => {
     setMeals([meal]);
     setHasSearched(true);
@@ -165,6 +182,7 @@ export default function Home() {
   };
 
   // Restore from URL on mount or param change
+  // Restores state from URL or session on mount
   useEffect(() => {
     const q = (searchParams.get("q") || "").trim();
     const type = searchParams.get("type") || "ingredients";
@@ -231,17 +249,20 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Render the main UI
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Page title */}
       <h1 className="text-3xl font-semibold">Discover Your Next Meal</h1>
       <div className="mt-2 flex items-center gap-2">
+        {/* Info text and meal suggestions */}
         <p className="text-gray-800">
           Search by ingredients (e.g., "chicken, rice") or meal names (e.g., "Arrabiata")
         </p>
         <MealSuggestions onMealSelect={handleMealSelect} />
       </div>
 
-      {/* Search Form */}
+      {/* Search form for meals */}
       <form onSubmit={handleSearch} className="mt-6 flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <input
@@ -252,6 +273,7 @@ export default function Home() {
             className="w-full rounded-lg border border-gray-200 px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 shadow-sm transition-all duration-200 bg-[#f3f8f8]"
           />
         </div>
+        {/* Search button */}
         <button
           type="submit"
           className="inline-flex items-center justify-center rounded-lg bg-orange-500 px-6 py-3 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-60 transition-all duration-200 shadow-sm"
@@ -259,6 +281,7 @@ export default function Home() {
         >
           {loading ? "Searching..." : "Search"}
         </button>
+        {/* Random meal button */}
         <button
           type="button"
           onClick={handleRandomMeal}
@@ -269,16 +292,18 @@ export default function Home() {
         </button>
       </form>
 
-      {/* Advanced Filters */}
+      {/* Advanced filters for meal search */}
       <AdvancedFilters 
         onFilterChange={handleFilterChange}
         selectedFilters={selectedFilters}
       />
 
       <div className="mt-6">
+        {/* Error message and loader */}
         {error && <ErrorMessage message={error} onRetry={handleSearch} />}
         {loading && <Loader />}
 
+        {/* No results found message */}
         {!loading && hasSearched && meals.length === 0 && !error && (
           <div className="text-center text-gray-600 py-16">
             <div className="text-6xl mb-4">🍽️</div>
@@ -286,7 +311,7 @@ export default function Home() {
           </div>
         )}
         
-        {/* Show SVG when idle or when no results after a search; hide only while loading */}
+        {/* Show SVG illustration when idle */}
         {!loading && meals.length === 0 && !error && !hasSearched && (
           <div className="py-2 flex flex-col items-center justify-center text-center">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-700 max-w-3xl">
@@ -301,6 +326,7 @@ export default function Home() {
           </div>
         )}
 
+        {/* Show recipe cards for found meals */}
         {!loading && meals.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             {meals.map((meal) => (

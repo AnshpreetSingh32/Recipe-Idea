@@ -1,9 +1,11 @@
+// About page for the app
 import { Link } from "react-router-dom";
 
+// Main About page component
 export default function About() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      {/* Hero Section */}
+      {/* Top hero section with app intro */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold mb-4">
           Cooking made simple — right from your pantry
@@ -14,9 +16,9 @@ export default function About() {
         </p>
       </div>
 
-      {/* Main Content */}
+      {/* Mission and How it Works cards */}
       <div className="grid md:grid-cols-2 gap-12 mb-12">
-        {/* Our Mission */}
+        {/* Mission card */}
         <div className="bg-gradient-to-br from-orange-100 to-orange-200 p-8 rounded-2xl border border-orange-100 flex flex-col items-center justify-center text-center">
           <div className="flex items-center justify-center gap-3 mb-2">
             <div className="text-3xl">🎯</div>
@@ -28,21 +30,24 @@ export default function About() {
           </p>
         </div>
 
-        {/* How it Works */}
+        {/* How it Works card */}
         <div className="bg-gradient-to-br from-[#e0ebed] to-[#c4d9dd] p-8 rounded-2xl border border-blue-100 flex flex-col items-center justify-center text-center">
           <div className="flex items-center justify-center mb-2 w-full">
             <div className="text-4xl">⚡</div>
             <h2 className="text-2xl font-semibold">How it Works</h2>
           </div>
           <div className="mt-3 space-y-3 text-gray-800 w-full">
+            {/* Step 1: Enter ingredients */}
             <div className="flex items-center justify-center">
               <span className="bg-[#f3f8f8] text-sm font-medium px-2 py-1 rounded-full mr-3">1</span>
               <span>Enter your ingredients</span>
             </div>
+            {/* Step 2: Get ideas */}
             <div className="flex items-center justify-center">
               <span className="bg-[#f3f8f8] text-sm font-medium px-2 py-1 rounded-full mr-3">2</span>
               <span>Get recipe ideas</span>
             </div>
+            {/* Step 3: Start cooking */}
             <div className="flex items-center justify-center">
               <span className="bg-[#f3f8f8] text-sm font-medium px-2 py-1 rounded-full mr-3">3</span>
               <span>Start cooking</span>
@@ -51,7 +56,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* Who We Are */}
+      {/* Who We Are section */}
       <div className="bg-gradient-to-br from-orange-100 to-[#c4d9dd] p-8 rounded-2xl mb-12 border border-purple-100">
         <div className="text-center">
           <div className="text-4xl mb-4">👨‍🍳</div>
@@ -63,7 +68,7 @@ export default function About() {
         </div>
       </div>
 
-      {/* CTA Section */}
+      {/* Call to action section */}
       <div className="text-center bg-gradient-to-tl from-orange-100 to-[#c4d9dd] p-8 rounded-2xl">
         <h3 className="text-2xl font-semibold mb-4">Ready to discover your next meal?</h3>
         <p className=" mb-6">
@@ -76,8 +81,6 @@ export default function About() {
           Start Searching Recipes →
         </Link>
       </div>
-
-
     </div>
   );
 }

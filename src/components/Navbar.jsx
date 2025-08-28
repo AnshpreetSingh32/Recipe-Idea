@@ -1,9 +1,15 @@
-import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
+/**
+ * Navbar Component
+ * 
+ * A responsive navigation bar component that includes the app logo, title, and navigation links.
+ * Features a sticky header with blur effect and handles navigation state cleanup on home navigation.
+ */
+
+import {NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
 
 function Navbar() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleHomeClick = () => {
     // Fresh home: clear any stored state and navigate to clean homepage

@@ -1,3 +1,13 @@
+/**
+ * MealSuggestions Component
+ * 
+ * A dropdown component that provides meal suggestions based on the first letter.
+ * Features a toggle button to show/hide suggestions and handles meal selection.
+ * 
+ * @param {Object} props
+ * @param {Function} props.onMealSelect - Callback function triggered when a meal is selected
+ */
+
 import { useState, useEffect } from "react";
 import { searchMealsByFirstLetter } from "../utils/api";
 

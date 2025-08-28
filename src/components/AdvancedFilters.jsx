@@ -1,3 +1,14 @@
+/**
+ * AdvancedFilters Component
+ * 
+ * A collapsible filter panel that allows users to filter recipes by categories, areas, and ingredients.
+ * Features dynamic loading of filter options, random ingredient suggestions, and state management.
+ * 
+ * @param {Object} props
+ * @param {Function} props.onFilterChange - Callback function triggered when filters are changed
+ * @param {Object} props.selectedFilters - Currently selected filters object
+ */
+
 import { useState, useEffect } from "react";
 import { getCategories, getAreas, getIngredients } from "../utils/api";
 
