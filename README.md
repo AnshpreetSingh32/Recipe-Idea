@@ -1,7 +1,7 @@
 # 🍳 What's Cooking?  
 
 **What's Cooking?** is a simple and clean recipe discovery app built with **React.js** and **Tailwind CSS**.  
-It helps busy professionals and home cooks quickly find recipes based on the ingredients they already have.  
+It helps busy professionals and home cooks to quickly find recipes based on the ingredients they already have.  
 
 The app uses the **[TheMealDB API](https://www.themealdb.com/)** to fetch recipes, ingredients, and cuisine information.  
 
@@ -19,7 +19,6 @@ The app uses the **[TheMealDB API](https://www.themealdb.com/)** to fetch recipe
 - ⚡ **Clean UI/UX** – minimal design with Tailwind CSS  
 - 🚦 **Error & loading states** – shows spinner and friendly error messages  
 - 📋 **Recipe details page** – full instructions, meal image, and ingredients list  
-
 
 ---
 
